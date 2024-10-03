@@ -1,0 +1,5 @@
+colorama
+requests
+datetime
+pytz
+tabulate
