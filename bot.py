@@ -54,27 +54,30 @@ def display_countdown(seconds):
 # Menentukan waktu untuk login harian
 def calculate_next_daily_login(start_time):
     now = datetime.now(pytz.utc)
-    next_daily_login = start_time + timedelta(days=1)
+    next_daily_login = start_time + timedelta(days=1)  # Use 'days' instead of 'day'
     delta = next_daily_login - now
     return max(delta.total_seconds(), 0)
 
 # Menentukan waktu untuk refill energy
 def calculate_next_refill(start_time):
     now = datetime.now(pytz.utc)
-    next_refill_time = start_time + timedelta(hours=1)
+    next_refill_time = start_time + timedelta(hours=2)
     delta = next_refill_time - now
     return max(delta.total_seconds(), 0)
 
 # Format balance to include comma as thousands separator and dot as decimal separator
 def format_balance(balance):
+    # Ensure balance is an integer and format it as needed
     balance_str = f"{balance / 100:,.2f}"
     return balance_str
+
+# Other imports and functions remain the same
 
 # Logika utama
 def main():
     last_daily_login_time = datetime.now(pytz.utc)
     last_refill_time = datetime.now(pytz.utc)
-    daily_login_done = False
+    daily_login_done = False  # Initialize the variable here
     daily_streak = "N/A"
     refill_count = 0
 
@@ -94,10 +97,13 @@ def main():
                     response = requests.post(daily_login_url, headers=headers, json=data)
                     response.raise_for_status()
                     daily_streak = response.json().get("dailyStreak", "N/A")
-                    print(f"{Fore.GREEN}Daily login successful for token: {auth_str}{Style.RESET_ALL}")
                 except requests.RequestException as e:
                     print(f"{Fore.RED}Failed to fetch data for daily login: {auth_str}{Style.RESET_ALL}")
+                    continue
 
+                print(f"{Fore.GREEN}Daily login successful for token: {auth_str}{Style.RESET_ALL}")
+                break
+            
             last_daily_login_time = datetime.now(pytz.utc)
             daily_login_done = True
 
@@ -123,9 +129,12 @@ def main():
                 try:
                     response = requests.post(refill_energy_url, headers=headers, json=data)
                     response.raise_for_status()
-                    print(f"{Fore.GREEN}Refill energy successful for token: {auth_str}{Style.RESET_ALL}")
                 except requests.RequestException as e:
                     print(f"{Fore.RED}Failed to fetch data for refill energy: {auth_str}{Style.RESET_ALL}")
+                    continue
+
+                print(f"{Fore.GREEN}Refill energy successful for token: {auth_str}{Style.RESET_ALL}")
+                break
 
             refill_count += 1
             last_refill_time = datetime.now(pytz.utc)
