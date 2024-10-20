@@ -34,12 +34,12 @@ Before you begin, make sure you have the following installed:
 ```
 
 ## Installation
-You can download the [**repository**](https://github.com/Doc-SLAV/apesofbtc/archive/refs/heads/main.zip) by cloning it to your system and installing the necessary dependencies:
+You can download the [**repository**](https://github.com/Doc-SLAV/apesofbtcSLAV/archive/refs/heads/main.zip) by cloning it to your system and installing the necessary dependencies:
 
 # Linux manual installation
 ```shell
-git clone https://github.com/Doc-SLAV/apesofbtc.git
-cd apesofbtc
+git clone https://github.com/Doc-SLAV/apesofbtcSLAV.git
+cd apesofbtcSLAV
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
@@ -49,8 +49,8 @@ python3 bot.py
 
 # Windows manual installation
 ```shell
-git clone https://github.com/Doc-SLAV/apesofbtc.git
-cd apesofbtc
+git clone https://github.com/Doc-SLAV/apesofbtcSLAVc.git
+cd apesofbtcSLAV
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
